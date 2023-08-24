@@ -1,0 +1,18 @@
+tensorflow
+pandas
+dvc
+notebook
+numpy
+matplotlib
+seaborn
+plotly
+joblib
+python-box == 6.0.2
+ensure==1.0.2
+types-pyYAML
+scipy
+Flask
+Flask-Cors
+pyYAML
+tqdm
+-e . # to install setup.py
