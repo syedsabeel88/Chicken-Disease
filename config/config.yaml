@@ -1,0 +1,7 @@
+artifacts_root: artifacts
+
+data_ingestion:
+  root_dir : artifacts/data_ingestion
+  source_url : https://github.com/syedsabeel88/Chicken-Disease/blob/main/ChickenDiseaseImages.zip
+  local_data_file : artifacts/data_ingestion/ChickenDiseaseDataset.zip
+  unzip_dir : artifacts/data_ingestion
