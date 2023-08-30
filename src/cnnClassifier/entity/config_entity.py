@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pathlib import Path
-
+ 
 # dataclasses are immutable, so they can't be changed
 @dataclass(frozen=True) # frozen=True means that the dataclass can't be changed
 class DataIngestionConfig:
