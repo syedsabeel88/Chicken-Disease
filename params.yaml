@@ -1,6 +1,6 @@
 AUGMENTATION: True
 IMAGE_SIZE: [224,224,3] # as per VGG16 model
-BATCH_SIZE: 16
+BATCH_SIZE: 8
 INCLUDE_TOP: False
 EPOCHS: 1
 CLASSES: 2 # cocci and healthy
