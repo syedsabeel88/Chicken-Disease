@@ -1,0 +1,57 @@
+stages:
+  data_ingestion:
+    cmd: python src/cnnClassifier/pipeline/Stage_01_Data_ingestion.py
+    deps:
+      - src/cnnClassifier/pipeline/Stage_01_Data_ingestion.py
+      - config/config.yaml
+    outs:
+      - artifacts/data_ingestion/ChickenDiseaseDataset
+
+  prepare_base_model:
+    cmd: python src/cnnClassifier/pipeline/Stage_02_Prepare_base_model.py
+    deps:
+      - src/cnnClassifier/pipeline/Stage_02_Prepare_base_model.py
+      - config/config.yaml
+    params:
+      - IMAGE_SIZE
+      - INCLUDE_TOP
+      - CLASSES
+      - WEIGHTS
+      - LEARNING_RATE
+    outs:
+      - artifacts/prepare_base_model
+
+
+
+  training:
+    cmd: python src/cnnClassifier/pipeline/Stage_03_Training.py
+    deps:
+      - src/cnnClassifier/pipeline/Stage_03_Training.py
+      - src/cnnClassifier/components/prepare_callbacks.py
+      - config/config.yaml
+      - artifacts/data_ingestion/ChickenDiseaseDataset
+      - artifacts/prepare_base_model
+    params:
+      - IMAGE_SIZE
+      - EPOCHS
+      - BATCH_SIZE
+      - AUGMENTATION
+    outs:
+      - artifacts/training/model.h5
+
+
+  
+
+  evaluation:
+    cmd: python src/cnnClassifier/pipeline/Stage_04_Evaluation.py
+    deps:
+      - src/cnnClassifier/pipeline/Stage_04_Evaluation.py
+      - config/config.yaml
+      - artifacts/data_ingestion/ChickenDiseaseDataset
+      - artifacts/training/model.h5
+    params:
+      - IMAGE_SIZE
+      - BATCH_SIZE
+    metrics:
+    - scores.json:
+        cache: false
